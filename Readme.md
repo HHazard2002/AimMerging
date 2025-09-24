@@ -1,5 +1,5 @@
-# AIMMerging
-Thank you for your interest in our work! This repository contains the original implementation of "AIMMerging: Leveraging Training Trajectories for Adaptive Iterative Model Merging in Language Model Continual Learning".
+# AIMMerging (EMNLP 2025)
+Thank you for your interest in our work! This repository contains the original implementation of "[AIMMerging: Adaptive Iterative Model Merging Using Training Trajectories for Language Model Continual Learning](https://arxiv.org/abs/2509.17348)".
 
 Reproducing the results from our paper is straightforward—just follow the steps outlined below.
 
@@ -56,3 +56,18 @@ To calculate the metrics, run:
 ```
 
 We hope you find this repository useful! If you encounter any issues or have questions, feel free to open an issue or contact us.
+
+
+## Citation
+If this work proves beneficial or use our code for your research, citing our paper would be greatly appreciated.
+```ruby
+@misc{feng2025aimmerging,
+      title={AIMMerging: Adaptive Iterative Model Merging Using Training Trajectories for Language Model Continual Learning}, 
+      author={Yujie Feng and Jian Li and Xiaoyu Dong and Pengfei Xu and Xiaohui Zhou and Yujia Zhang and Zexin LU and Yasha Wang and Alan Zhao and Xu Chu and Xiao-Ming Wu},
+      year={2025},
+      eprint={2509.17348},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2509.17348}, 
+}
+```
