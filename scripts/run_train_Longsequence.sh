@@ -2,7 +2,7 @@
 
 # 设置起始变量
 
-CUDA_DEVICE=3
+CUDA_DEVICE=0,1,2,3
 
 begin_id=0
 # 初始的迭代步长，后续会自适应调整
@@ -29,8 +29,8 @@ for ((ORDER=$begin_id; ORDER<15; ORDER++))
 do
     # 执行 Python 文件，传递参数 $i
 
-    CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python finetune_ours_t5lora.py \
-        --base_model '/your_model_path' \
+    CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python ./src/finetune_ours.py \
+        --base_model './models/t5-large/' \
         --method_name "${method_name}" \
         --num_epochs=10 \
         --dataset_id=${data_id} \
@@ -50,26 +50,9 @@ do
 
 done
 
-
 wait
 
-
-CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python generate_avgPerf_t5lora.py \
-    --base_model '/your_model_path' \
+CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python ./src/generate_avgPerf.py \
+    --base_model './models/t5-large/' \
     --dataset_id=${data_id} \
     --method_name "${method_name}" \
-
-wait
-
-# 循环从 begin_id 到 15
-for ((ORDER=$begin_id; ORDER<15; ORDER++))
-do
-    # 执行 Python 文件，传递参数 $i
-    CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python generate_bwt_t5lora.py \
-        --base_model '/your_model_path' \
-        --dataset_id=${data_id} \
-        --service_begin_id=${ORDER} \
-        --method_name "${method_name}" \
-        
-    # 可以在这里添加任何你需要的其他操作，如等待一段时间等
-done

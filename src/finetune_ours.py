@@ -27,9 +27,9 @@ from peft import (
     LoraConfig,
     get_peft_model,
     get_peft_model_state_dict,
-    prepare_model_for_int8_training,
     set_peft_model_state_dict,
 )
+from peft import prepare_model_for_kbit_training as prepare_model_for_int8_training
 from transformers import LlamaForCausalLM, LlamaTokenizer
 
 from utils.prompter import Prompter
@@ -59,7 +59,7 @@ def train(
     base_model: str = "",  # the only required argument
     data_dir: str = "./data_longsequence",
     output_path: str = "./checkpoint_files",
-    cache_dir: str = "/",
+    cache_dir: str = "./dataset_cache",
     # training hyperparams
     batch_size: int = 8, # 16
     micro_batch_size: int = 2, # 4
