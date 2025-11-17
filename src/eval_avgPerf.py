@@ -44,7 +44,7 @@ def main(args):
     #print("Calculating JGA score for each service.....")
     acc_task_num = 0
     for service_id in range(0, len(dataset_order)):
-        print(f"task name: {dataset_order[service_id]}")
+        #print(f"task name: {dataset_order[service_id]}")
         result_file = os.path.join(output_dir, str(service_id)+"-"+dataset_order[service_id] +"_result.txt")        
         model_results = open(result_file, "r").readlines()
         
@@ -53,7 +53,7 @@ def main(args):
         
         ground_truth_list = []
         predictions_list = []
-        for idx_ in range(0, len(test_lines)):
+        for idx_ in range(0, min(len(test_lines), 500)):
             ground_truth = test_lines[idx_]['output']
             result_line = model_results[idx_].strip().lower()
             prediction = result_line.split("|||")[-1]
@@ -76,7 +76,7 @@ def main(args):
 
         joint_accuracy = cal_accuracy(ground_truth_list, predictions_list)
        #print(ground_truth_list[0], predictions_list[0])
-        print(f"分类问题的结果是：{joint_accuracy}")
+        print(f"{dataset_order[service_id]}: {joint_accuracy}")
 
 
         avgPerf_list.append(round(joint_accuracy,4))
