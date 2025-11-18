@@ -2678,9 +2678,8 @@ class Trainer:
                             # 看看这里的delta_in 参数的变化量是啥
                             #print(delta_in)
                             # 计算所有参数变化量绝对值的和, 平均每一次iteration的变化量
-                            local_sum = sum(p.abs().sum() for p in delta_in.values())
-                            dist.all_reduce(local_sum, op=dist.ReduceOp.SUM)  # sums across GPUs
-                            total_abs_change = local_sum.item() / self._inner_iterations
+                            total_abs_change = sum(p.abs().sum().to("cuda:0") for p in delta_in.values()).item() / self._inner_iterations
+
                             #total_abs_change = sum(p.abs().sum() for p in delta_in.values()).item() / self._inner_iterations
                             #print("来了老弟")
                             #print(total_abs_change)
